@@ -34,23 +34,15 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         return true
     }
 
+    /* TODO: Task 4. Fix menu buttons.
+        1. Add check for R.id.action_date and call showDateDialog()
+        2. Add check for R.id.action_delete and call deleteNote(). Also call finish() to close screen.
+        3. Add check for android.R.id.home and call a function to close screen (hint in step 2).
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_save -> {
                 onSaveClick()
-                return true
-            }
-            R.id.action_date -> {
-                showDateDialog()
-                return true
-            }
-            R.id.action_delete -> {
-                deleteNote()
-                finish()
-                return true
-            }
-            android.R.id.home -> {
-                finish()
                 return true
             }
         }
@@ -66,12 +58,7 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         [Cheat 3.1]
      */
     private fun onSaveClick() {
-        if (currentNote == null) {
-            saveNote()
-        } else {
-            updateNote()
-        }
-        finish()
+
     }
 
     /*
@@ -84,12 +71,7 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         [Cheat 3.2]
     */
     private fun saveNote() {
-        val newNote = Note(
-            date = currentDate,
-            title = input_title.text.toString(),
-            note = input_note.text.toString()
-        )
-        saveToDatabase(newNote)
+
     }
 
     /*
@@ -100,16 +82,11 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         4. Pass input_title.text.toString() as title param.
         5. Pass input_note.text.toString() as note param.
         6. Call updateInDatabase() and pass created Note as param.
+        7. Uncomment all code in this file with comment: TODO: UNCOMMENT ME. Hint: there are 2 places.
         [Cheat 3.3]
     */
     private fun updateNote() {
-        val newNote = Note(
-            id = currentNote!!.id,
-            date = currentDate,
-            title = input_title.text.toString(),
-            note = input_note.text.toString()
-        )
-        updateInDatabase(newNote)
+
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -117,7 +94,10 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         val d = dayOfMonth.formatWithZero()
         val m = (month + 1).formatWithZero()
         currentDate = "$d.$m.$year"
+        /*
+        TODO: UNCOMMENT ME
         date.text = currentDate
+        */
     }
 
     private fun deleteNote() {
@@ -170,6 +150,7 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun observeCurrentNote(id: Long) {
+        /* TODO: UNCOMMENT ME
         App.NOTES.getNote(id).observe(this, Observer { nullableNote ->
             currentNote = nullableNote
 
@@ -181,6 +162,7 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
             date.text = nullableNote?.date ?: currentDate
         })
+         */
     }
 
     private fun showDateDialog() {

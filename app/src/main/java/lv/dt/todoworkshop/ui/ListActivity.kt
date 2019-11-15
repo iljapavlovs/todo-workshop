@@ -19,13 +19,10 @@ class ListActivity : AppCompatActivity() {
 
         /*
         TODO: Task 1. Step 1. Open form activity.
-            Set a listener for the add button that will open FormActivity when it's clicked
+            Set a listener by calling .setOnClickListener {} for the add button that will open FormActivity when it's clicked
             Pass null as the parameter because we are saving new note, not updating existing
             [Cheat 1.1]
         */
-        add.setOnClickListener {
-            openFormActivity(null)
-        }
     }
 
     /*
@@ -36,8 +33,7 @@ class ListActivity : AppCompatActivity() {
         [Cheat 1.2]
     */
     private fun openFormActivity(noteId: Long?) {
-        val intent = FormActivity.createIntent(this, noteId)
-        startActivity(intent)
+
     }
 
 
