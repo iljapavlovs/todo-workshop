@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/form_container"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <!-- TODO Task 2. Create open form view. Add 2 TextInputLayouts from Design -> Palette -> Text.
+        Set the id of the first TextInputEditText (read the name carefully: id of TextInputEditText, not
+        TextInputLayout) to input_title and the second one to input_note. Set the hint attribute of first
+        TextInputLayout to Title and the second to Details.
+        Underneath second TextInputLayout add a TextView and set it's id to date.
+        You can play around with different attributes that you find in the panel.
+        Now you can switch to Design mode. Or try yourself in text mode, if you're feeling geeky :P
+    !-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="title"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_title"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:backgroundTint="#e2e2e2"
+            android:fontFamily="sans-serif-smallcaps"
+            android:singleLine="true"
+            android:textAllCaps="true"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_note"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Details"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_note"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:backgroundTint="#e2e2e2"
+            android:fontFamily="sans-serif-light"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:textColor="@color/primary"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:padding="2dp"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_note" />
+</LinearLayout>

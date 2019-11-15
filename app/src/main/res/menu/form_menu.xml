@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Date"
+        android:id="@+id/action_date"
+        android:enabled="true"
+        android:icon="@drawable/ic_date"
+        app:showAsAction="always" />
+    <item
+        android:title="Delete"
+        android:id="@+id/action_delete"
+        android:enabled="true"
+        android:icon="@drawable/ic_delete_white"
+        app:showAsAction="always" />
+    <item
+        android:title="Save"
+        android:id="@+id/action_save"
+        android:enabled="true"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="always" />
+</menu>
