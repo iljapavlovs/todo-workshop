@@ -1,6 +1,7 @@
 package lv.dt.todoworkshop.ui
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,6 +24,15 @@ class ListActivity : AppCompatActivity() {
             Pass null as the parameter because we are saving new note, not updating existing
             [Cheat 1.1]
         */
+//        todo - no need to find the element, since we are inside the layout and it knows about evry elemnt
+//        val addBtn = findViewById<Button>(R.id.addBtn)
+        addBtn.setOnClickListener {
+
+            //when null - creating new NOTE
+            // when id is present - UPDATE note
+            openFormActivity(null)
+        }
+
     }
 
     /*
@@ -32,7 +42,14 @@ class ListActivity : AppCompatActivity() {
         2. Call startActivity() method and pass created intent as param.
         [Cheat 1.2]
     */
-    private fun openFormActivity(noteId: Long?) {
+    private fun openFormActivity(noteId: Long? = null) {
+
+        //  in order to interact between Activities, we need to create Intent
+        // context - from which context to create (in this cas - its ListActivity)
+        val intent = FormActivity.createIntent(this, noteId)
+
+        //  start activity    - NEEDED to start everything
+        startActivity(intent)
 
     }
 

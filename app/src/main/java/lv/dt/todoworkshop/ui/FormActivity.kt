@@ -21,6 +21,7 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private var currentNote: Note? = null
     private var currentDate: String = "16.11.2019"
 
+//    AS MAIN() FOR ACTIVITY. ALWAYS START HERE - INIT METHOD
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUp()
@@ -39,13 +40,38 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         2. Add check for R.id.action_delete and call deleteNote(). Also call finish() to close screen.
         3. Add check for android.R.id.home and call a function to close screen (hint in step 2).
      */
+
+//    MENU - FORM_MENU.XML
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_save -> {
                 onSaveClick()
+            // it is a callback, means have handled the click, and no one else needs to handle it
+//                tell the system that handling is finished when returning true
                 return true
             }
+
+            R.id.action_date -> {
+                showDateDialog()
+                return true
+            }
+
+            R.id.action_delete -> {
+                deleteNote()
+                finish()
+                return true
+            }
+//
+//           ANDROID MENU GLOBAL ID, no need to specify additional ID
+//            BACK BUTTON!!!
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+
+
         }
+//        IF WE DONT RETURN TRUE, THEN PARENT METHOD WILL DO IT
         return super.onOptionsItemSelected(item)
     }
 
@@ -58,7 +84,14 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         [Cheat 3.1]
      */
     private fun onSaveClick() {
+        if(currentNote == null){
 
+            saveNote()
+        }else{
+            updateNote()
+        }
+
+        finish()
     }
 
     /*
@@ -71,6 +104,15 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         [Cheat 3.2]
     */
     private fun saveNote() {
+
+        val note = Note(
+            date = currentDate,
+//            need to convert ot string
+            title = input_title.text.toString(),
+            note = input_note.text.toString()
+
+        )
+        saveToDatabase(note)
 
     }
 
@@ -87,6 +129,16 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     */
     private fun updateNote() {
 
+        val note = Note(
+            id = currentNote!!.id,
+            date = currentDate,
+            title = input_title.text.toString(),
+            note = input_note.text.toString()
+
+            )
+
+        updateInDatabase(note)
+
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -96,8 +148,8 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         currentDate = "$d.$m.$year"
         /*
         TODO: UNCOMMENT ME
-        date.text = currentDate
         */
+        date.text = currentDate
     }
 
     private fun deleteNote() {
@@ -151,6 +203,9 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private fun observeCurrentNote(id: Long) {
         /* TODO: UNCOMMENT ME
+
+        IF YOU HAVE A NOTE WITH ID, THEN GIVE IT TO ME
+        */
         App.NOTES.getNote(id).observe(this, Observer { nullableNote ->
             currentNote = nullableNote
 
@@ -162,7 +217,7 @@ class FormActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
             date.text = nullableNote?.date ?: currentDate
         })
-         */
+
     }
 
     private fun showDateDialog() {
